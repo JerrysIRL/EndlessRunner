@@ -1,4 +1,5 @@
-Plugins/Developer/RiderLink
+Plugins/Developer/RiderLink/Binaries
+Plugins/Developer/RiderLink/Intermediate
 
 # Visual Studio 2015 user specific files
 .vs/
