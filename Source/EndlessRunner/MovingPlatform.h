@@ -24,20 +24,16 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	USceneComponent* DefaultRoot = nullptr;
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AMovingPlatform();
-
+	FVector GetSpawnPointLocation() const;
 	
-	 FVector GetSpawnPointLocation() const;
+	void MovePlatform(float DeltaTime);
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 };

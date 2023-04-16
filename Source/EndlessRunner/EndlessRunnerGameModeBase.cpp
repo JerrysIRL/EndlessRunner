@@ -4,7 +4,6 @@
 #include "EndlessRunnerGameModeBase.h"
 
 #include "MovingPlatform.h"
-#include "Components/ArrowComponent.h"
 
 void AEndlessRunnerGameModeBase::BeginPlay()
 {
@@ -12,27 +11,34 @@ void AEndlessRunnerGameModeBase::BeginPlay()
 	SpawnPlatform(FVector());
 	for (int i = 1; i < StartingAmount; i++)
 	{
-		SpawnPlatform(NextSpawningPosition);
+		SpawnPlatform(GetSpawningPosition());
 	}
 	
 }
 
 void AEndlessRunnerGameModeBase::MovePlatform(AActor* Platform, FVector Position)
 {
-	//Platform ->SetActorLocation(Position);
+	Platform -> SetActorLocation(Position);
+	AMovingPlatform* temp = Cast<AMovingPlatform>(Platform);
+	SetNextPlatform(temp);
 	
+}
+
+FVector AEndlessRunnerGameModeBase::GetSpawningPosition() const
+{
+	return LastPlatform->GetSpawnPointLocation();
 }
 
 void AEndlessRunnerGameModeBase::SpawnPlatform(FVector SpawnPos)
 {
 	UWorld* World = GetWorld();
 	AMovingPlatform* PlatformPtr = World->SpawnActor<AMovingPlatform>(MovingPlatformBP, SpawnPos, FRotator());
-	SetNextSpawningPosition(PlatformPtr->GetSpawnPointLocation());
+	SetNextPlatform(PlatformPtr);
 }
 
-void AEndlessRunnerGameModeBase::SetNextSpawningPosition(FVector SpawnPos)
+void AEndlessRunnerGameModeBase::SetNextPlatform(AMovingPlatform* Platform)
 {
-	NextSpawningPosition = SpawnPos;
+	LastPlatform = Platform;
 }
 
 

@@ -3,6 +3,9 @@
 
 #include "BoxTrigger.h"
 
+#include "EndlessRunnerGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
+
 UBoxTrigger::UBoxTrigger()
 {
 	PrimaryComponentTick.bCanEverTick = true;
@@ -12,14 +15,19 @@ UBoxTrigger::UBoxTrigger()
 void UBoxTrigger::BeginPlay()
 {
 	Super::BeginPlay();
+	GameModeRef = Cast<AEndlessRunnerGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+
+
 	this->OnComponentBeginOverlap.AddDynamic(this, &UBoxTrigger::OnComponentOverlap);
 }
 
-void UBoxTrigger::OnComponentOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void UBoxTrigger::OnComponentOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(INDEX_NONE, 10.f, FColor::Red,(TEXT("On Component Overlap Begin!")));
-	UE_LOG(LogTemp, Warning, TEXT("Collided with the Platform:"));
-
+	if (OtherActor->ActorHasTag("Platform"))
+	{
+		FVector MovePos = GameModeRef->GetSpawningPosition();
+		GameModeRef->MovePlatform(OtherActor, MovePos);
+	}
 }
 
 void UBoxTrigger::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -27,11 +35,4 @@ void UBoxTrigger::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	TArray<AActor*> OverlappingActors;
 	GetOverlappingActors(OverlappingActors);
-	// for (auto Actor : OverlappingActors)
-	// {
-	// 	if (Actor->ActorHasTag("Platform"))
-	// 	{
-	// 		UE_LOG(LogTemp, Warning, TEXT("Collided with the Platform: %s"), *Actor->GetActorNameOrLabel());
-	// 	}
-	// }
 }

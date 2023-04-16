@@ -21,31 +21,27 @@ AMovingPlatform::AMovingPlatform()
 
 FVector AMovingPlatform::GetSpawnPointLocation() const
 {
-	return this->SpawnPoint->GetComponentLocation();
+	return SpawnPoint->GetComponentLocation();
 }
 
 
-// Called when the game starts or when spawned
-void AMovingPlatform::BeginPlay()
+void AMovingPlatform::MovePlatform(float DeltaTime)
 {
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void AMovingPlatform::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 	FVector CurrentLocation = GetActorLocation();
-	UE_LOG(LogTemp,Warning, TEXT("CurrentPos is : %s"), *CurrentLocation.ToString())
 	
 	FVector NewLocation = FVector(
-	CurrentLocation.X += GetActorForwardVector().X * PlatformSpeed *DeltaTime,
-	CurrentLocation.Y,
-	CurrentLocation.Z
+		CurrentLocation.X += GetActorForwardVector().X * PlatformSpeed * DeltaTime,
+		CurrentLocation.Y,
+		CurrentLocation.Z
 	);
 	
 	SetActorLocation(NewLocation);
+}
+
+void AMovingPlatform::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	MovePlatform(DeltaTime);
 	
 	
 

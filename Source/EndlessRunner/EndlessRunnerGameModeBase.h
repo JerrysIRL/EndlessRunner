@@ -16,24 +16,29 @@ class ENDLESSRUNNER_API AEndlessRunnerGameModeBase : public AGameModeBase
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(EditDefaultsOnly,Category="ActorSpawning")
+	UPROPERTY(EditDefaultsOnly, Category="ActorSpawning")
 	TSubclassOf<AMovingPlatform> MovingPlatformBP;
 
+	UPROPERTY()
+	AMovingPlatform* LastPlatform;
 	FVector NextSpawningPosition;
 
 	UPROPERTY(EditAnywhere)
-	int StartingAmount =10;
+	int StartingAmount = 10;
 
 private:
 	UFUNCTION(BlueprintCallable)
-	void MovePlatform(AActor* Platform, FVector Position);
-
-	UFUNCTION(BlueprintCallable)
 	void SpawnPlatform(FVector SpawnPos);
 
-	UFUNCTION()
-	void SetNextSpawningPosition(FVector NextSpawnPos);
+public:
+	UFUNCTION(BlueprintCallable)
+	void MovePlatform(AActor* Platform, FVector Position);
 
+	UFUNCTION()
+	FVector GetSpawningPosition() const;
+	
+	UFUNCTION()
+	void SetNextPlatform(AMovingPlatform* Platform);
 
 protected:
 	// Called when the game starts or when spawned

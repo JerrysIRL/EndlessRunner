@@ -6,6 +6,7 @@
 #include "Components/BoxComponent.h"
 #include "BoxTrigger.generated.h"
 
+class AEndlessRunnerGameModeBase;
 /**
  * 
  */
@@ -15,6 +16,10 @@ class ENDLESSRUNNER_API UBoxTrigger : public UBoxComponent
 	GENERATED_BODY()
 	UBoxTrigger();
 
+private:
+	UPROPERTY()
+	AEndlessRunnerGameModeBase* GameModeRef;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
