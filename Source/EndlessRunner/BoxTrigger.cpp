@@ -5,6 +5,7 @@
 
 #include "EndlessRunnerGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
+#define FooBar 5
 
 UBoxTrigger::UBoxTrigger()
 {
@@ -16,7 +17,6 @@ void UBoxTrigger::BeginPlay()
 {
 	Super::BeginPlay();
 	GameModeRef = Cast<AEndlessRunnerGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
-
 
 	this->OnComponentBeginOverlap.AddDynamic(this, &UBoxTrigger::OnComponentOverlap);
 }
@@ -30,9 +30,9 @@ void UBoxTrigger::OnComponentOverlap(UPrimitiveComponent* OverlappedComp, AActor
 	}
 }
 
+
 void UBoxTrigger::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	TArray<AActor*> OverlappingActors;
-	GetOverlappingActors(OverlappingActors);
+	
 }

@@ -3,7 +3,7 @@
 
 #include "EndlessRunnerGameModeBase.h"
 
-#include "MovingPlatform.h"
+
 
 void AEndlessRunnerGameModeBase::BeginPlay()
 {
@@ -13,15 +13,13 @@ void AEndlessRunnerGameModeBase::BeginPlay()
 	{
 		SpawnPlatform(GetSpawningPosition());
 	}
-	
 }
 
 void AEndlessRunnerGameModeBase::MovePlatform(AActor* Platform, FVector Position)
 {
-	Platform -> SetActorLocation(Position);
+	Platform->SetActorLocation(Position);
 	AMovingPlatform* temp = Cast<AMovingPlatform>(Platform);
 	SetNextPlatform(temp);
-	
 }
 
 FVector AEndlessRunnerGameModeBase::GetSpawningPosition() const
@@ -34,14 +32,10 @@ void AEndlessRunnerGameModeBase::SpawnPlatform(FVector SpawnPos)
 	UWorld* World = GetWorld();
 	AMovingPlatform* PlatformPtr = World->SpawnActor<AMovingPlatform>(MovingPlatformBP, SpawnPos, FRotator());
 	SetNextPlatform(PlatformPtr);
+	
 }
 
 void AEndlessRunnerGameModeBase::SetNextPlatform(AMovingPlatform* Platform)
 {
 	LastPlatform = Platform;
 }
-
-
-
-
-

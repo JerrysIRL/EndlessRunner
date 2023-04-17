@@ -3,9 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MovingPlatform.h"
 #include "GameFramework/GameModeBase.h"
+#include "MovingPlatform.h"
 #include "EndlessRunnerGameModeBase.generated.h"
+
 
 /**
  * 
@@ -21,6 +22,7 @@ private:
 
 	UPROPERTY()
 	AMovingPlatform* LastPlatform;
+	
 	FVector NextSpawningPosition;
 
 	UPROPERTY(EditAnywhere)
