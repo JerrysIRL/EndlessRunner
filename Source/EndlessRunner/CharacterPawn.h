@@ -6,6 +6,8 @@
 #include "GameFramework/Pawn.h"
 #include "CharacterPawn.generated.h"
 
+class USpringArmComponent;
+class UCameraComponent;
 UCLASS()
 class ENDLESSRUNNER_API ACharacterPawn : public APawn
 {
@@ -13,7 +15,17 @@ class ENDLESSRUNNER_API ACharacterPawn : public APawn
 
 private:
 
+	UPROPERTY(VisibleAnywhere)
+	USceneComponent* Root;
+	
+	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Mesh;
+	
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* SpringArm;
+
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* CameraComponent;
 	
 	UPROPERTY(EditAnywhere)
 	float MovementSpeed = 50;
@@ -26,7 +38,7 @@ private:
 
 	void Move(float Value);
 
-	
+
 public:
 	// Sets default values for this pawn's properties
 	ACharacterPawn();
@@ -35,11 +47,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 };

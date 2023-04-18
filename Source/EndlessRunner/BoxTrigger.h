@@ -19,7 +19,8 @@ class ENDLESSRUNNER_API UBoxTrigger : public UBoxComponent
 private:
 	UPROPERTY()
 	AEndlessRunnerGameModeBase* GameModeRef;
-	
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
