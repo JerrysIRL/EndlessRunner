@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BaseMover.h"
 #include "GameFramework/Actor.h"
 #include "ObstacleSpawner.generated.h"
 
@@ -16,8 +17,8 @@ enum SpawnAlternative
 	Obstacle,
 	Coin,
 	MedPack
-	
 };
+
 UCLASS()
 class ENDLESSRUNNER_API AObstacleSpawner : public AActor
 {
@@ -30,9 +31,20 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AObstacle> ObstacleBP;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ABaseMover> CoinBP;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ABaseMover> MedPackBP;
+
 	TArray<FVector> PosArray;
 
-	TArray<int> Pattern1 = {0, 0, 0, 1, 1, 2};
+	TArray<int> PatternOne = {Obstacle, Obstacle, Obstacle, Coin, Coin, MedPack};
+
+private:
+	
+	void SpawnObstacleWave();
+	void InitializeSpawnPositions();
 
 public:
 	// Sets default values for this actor's properties

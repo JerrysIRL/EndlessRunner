@@ -28,6 +28,7 @@ void ABaseMover::BeginPlay()
 void ABaseMover::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	MoveObstacle(DeltaTime);
 
 }
 

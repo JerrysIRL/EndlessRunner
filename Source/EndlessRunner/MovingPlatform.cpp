@@ -3,8 +3,6 @@
 
 #include "MovingPlatform.h"
 
-#include "EndlessRunnerGameModeBase.h"
-
 
 // Sets default values
 AMovingPlatform::AMovingPlatform()
@@ -25,7 +23,6 @@ void AMovingPlatform::BeginPlay()
 void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	MoveObstacle(DeltaTime);
 }
 
 FVector AMovingPlatform::GetSpawnPointLocation() const

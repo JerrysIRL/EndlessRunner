@@ -23,6 +23,5 @@ void AObstacle::BeginPlay()
 void AObstacle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	MoveObstacle(DeltaTime);
 }
 
