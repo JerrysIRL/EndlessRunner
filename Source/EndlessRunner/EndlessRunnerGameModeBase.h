@@ -19,6 +19,7 @@ class ENDLESSRUNNER_API AEndlessRunnerGameModeBase : public AGameModeBase
 private:
 	UPROPERTY(EditDefaultsOnly, Category="ActorSpawning")
 	TSubclassOf<AMovingPlatform> MovingPlatformBP;
+	
 
 	UPROPERTY(EditAnywhere)
 	float MoveSpeed = -500;
@@ -42,7 +43,7 @@ public:
 	UFUNCTION()
 	FVector GetSpawningPosition() const;
 	
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void SetNextPlatform(AMovingPlatform* Platform);
 
 	float GetMoveSpeed();

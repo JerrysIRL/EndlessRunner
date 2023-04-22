@@ -20,6 +20,7 @@ private:
 	UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess = "true"))
 	UArrowComponent* SpawnPoint;
 
+	FBox BoundingBox;
 
 protected:
 	
@@ -30,6 +31,8 @@ public:
 	// Sets default values for this actor's properties
 	AMovingPlatform();
 	FVector GetSpawnPointLocation() const;
+
+	FBox GetPlatformBounds() const;
 
 
 

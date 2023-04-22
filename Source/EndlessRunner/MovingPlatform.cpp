@@ -11,7 +11,7 @@ AMovingPlatform::AMovingPlatform()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
+
 	SpawnPoint = CreateDefaultSubobject<UArrowComponent>("Spawn Point");
 	SpawnPoint->SetupAttachment(BaseMesh);
 }
@@ -19,6 +19,13 @@ AMovingPlatform::AMovingPlatform()
 void AMovingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
+	BoundingBox = GetComponentsBoundingBox(false, false);
+}
+
+void AMovingPlatform::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	MoveObstacle(DeltaTime);
 }
 
 FVector AMovingPlatform::GetSpawnPointLocation() const
@@ -26,8 +33,8 @@ FVector AMovingPlatform::GetSpawnPointLocation() const
 	return SpawnPoint->GetComponentLocation();
 }
 
-void AMovingPlatform::Tick(float DeltaTime)
+FBox AMovingPlatform::GetPlatformBounds() const
 {
-	Super::Tick(DeltaTime);
-	MoveObstacle(DeltaTime);
+	return BoundingBox;
+	
 }

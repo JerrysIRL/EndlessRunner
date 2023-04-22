@@ -51,9 +51,6 @@ void ACharacterPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void ACharacterPawn::Move(float Value)
 {
-	//float yFloat = FMath::Clamp(Value * MovementSpeed * GetWorld()->GetDeltaSeconds(), MinValue, MaxValue);
-	
 	FVector MovementVector = FVector(0, Value * MovementSpeed * GetWorld()->GetDeltaSeconds(),0);
 	AddActorLocalOffset(MovementVector, true);
-	UE_LOG(LogTemp, Warning, TEXT("InputValue is : %f"), Value);
 }

@@ -26,7 +26,7 @@ void AEndlessRunnerGameModeBase::SpawnPlatform(FVector SpawnPos)
 {
 	UWorld* World = GetWorld();
 	AMovingPlatform* PlatformPtr = World->SpawnActor<AMovingPlatform>(MovingPlatformBP, SpawnPos, FRotator());
-	SetNextPlatform(PlatformPtr);
+ 	SetNextPlatform(PlatformPtr);
 }
 
 void AEndlessRunnerGameModeBase::SetNextPlatform(AMovingPlatform* Platform)
