@@ -20,6 +20,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category="ActorSpawning")
 	TSubclassOf<AMovingPlatform> MovingPlatformBP;
 
+	UPROPERTY(EditAnywhere)
+	float MoveSpeed = -500;
+	
 	UPROPERTY()
 	AMovingPlatform* LastPlatform;
 	
@@ -42,7 +45,10 @@ public:
 	UFUNCTION()
 	void SetNextPlatform(AMovingPlatform* Platform);
 
+	float GetMoveSpeed();
+
 protected:
+	void SpawnInitialPlatforms();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 };

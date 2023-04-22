@@ -4,15 +4,10 @@
 #include "EndlessRunnerGameModeBase.h"
 
 
-
 void AEndlessRunnerGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
-	SpawnPlatform(FVector());
-	for (int i = 1; i < StartingAmount; i++)
-	{
-		SpawnPlatform(GetSpawningPosition());
-	}
+	SpawnInitialPlatforms();
 }
 
 void AEndlessRunnerGameModeBase::MovePlatform(AActor* Platform, FVector Position)
@@ -32,10 +27,23 @@ void AEndlessRunnerGameModeBase::SpawnPlatform(FVector SpawnPos)
 	UWorld* World = GetWorld();
 	AMovingPlatform* PlatformPtr = World->SpawnActor<AMovingPlatform>(MovingPlatformBP, SpawnPos, FRotator());
 	SetNextPlatform(PlatformPtr);
-	
 }
 
 void AEndlessRunnerGameModeBase::SetNextPlatform(AMovingPlatform* Platform)
 {
 	LastPlatform = Platform;
+}
+
+float AEndlessRunnerGameModeBase::GetMoveSpeed()
+{
+	return MoveSpeed;
+}
+
+void AEndlessRunnerGameModeBase::SpawnInitialPlatforms()
+{
+	SpawnPlatform(FVector());
+	for (int i = 1; i < StartingAmount; i++)
+	{
+		SpawnPlatform(GetSpawningPosition());
+	}
 }

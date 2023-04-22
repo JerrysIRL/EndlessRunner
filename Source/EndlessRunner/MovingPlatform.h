@@ -3,34 +3,34 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BaseMover.h"
 #include "Components/ArrowComponent.h"
 #include "GameFramework/Actor.h"
 #include "MovingPlatform.generated.h"
 
+class AEndlessRunnerGameModeBase;
+
 UCLASS()
-class ENDLESSRUNNER_API AMovingPlatform : public AActor
+class ENDLESSRUNNER_API AMovingPlatform : public ABaseMover
 {
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(VisibleAnywhere, meta=(AllowPrivateAccess = "true"))
-	UStaticMeshComponent* BaseMesh;
 
 	UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess = "true"))
 	UArrowComponent* SpawnPoint;
 
-	UPROPERTY(EditAnywhere)
-	float PlatformSpeed = -300;
 
-	UPROPERTY(EditAnywhere)
-	USceneComponent* DefaultRoot = nullptr;
-
+protected:
+	
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+	
 public:
 	// Sets default values for this actor's properties
 	AMovingPlatform();
 	FVector GetSpawnPointLocation() const;
-	
-	void MovePlatform(float DeltaTime);
+
 
 
 public:
