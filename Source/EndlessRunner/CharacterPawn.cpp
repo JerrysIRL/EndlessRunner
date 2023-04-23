@@ -49,6 +49,9 @@ void ACharacterPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAxis("Move Right / Left", this, &ACharacterPawn::Move );
+	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &ACharacterPawn::Crouch);
+	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &ACharacterPawn::ResetRot);
+	
 
 }
 
@@ -56,4 +59,15 @@ void ACharacterPawn::Move(float Value)
 {
 	FVector MovementVector = FVector(0, Value * MovementSpeed * GetWorld()->GetDeltaSeconds(),0);
 	AddActorLocalOffset(MovementVector, true);
+}
+
+void ACharacterPawn::Crouch()
+{
+	FRotator Target = FRotator(-90,0,0);
+	CapsuleComponent->AddLocalRotation(Target);
+}
+
+void ACharacterPawn::ResetRot()
+{
+	CapsuleComponent->AddLocalRotation(FRotator(90,0,0));
 }

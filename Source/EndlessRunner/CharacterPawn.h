@@ -42,6 +42,10 @@ private:
 
 	void Move(float Value);
 
+	void Crouch();
+
+	void ResetRot();
+
 
 public:
 	// Sets default values for this pawn's properties
