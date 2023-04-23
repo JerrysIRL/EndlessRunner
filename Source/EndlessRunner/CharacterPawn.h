@@ -18,6 +18,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
+
+	UPROPERTY(VisibleAnywhere)
+	UCapsuleComponent* CapsuleComponent;
 	
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* BaseMesh;

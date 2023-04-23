@@ -4,6 +4,7 @@
 #include "CharacterPawn.h"
 
 #include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
 
@@ -12,8 +13,9 @@ ACharacterPawn::ACharacterPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	Root = CreateDefaultSubobject<USceneComponent>("Root Component");
-	RootComponent = Root;
+
+	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>("CapsuleComp");
+	RootComponent = CapsuleComponent;
 
 	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>("BaseMesh");
 	BaseMesh->SetupAttachment(RootComponent);
