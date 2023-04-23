@@ -14,12 +14,12 @@ ACharacterPawn::ACharacterPawn()
 	PrimaryActorTick.bCanEverTick = true;
 	Root = CreateDefaultSubobject<USceneComponent>("Root Component");
 	RootComponent = Root;
-	
-	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("BaseMesh");
-	Mesh->SetupAttachment(Root);
+
+	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>("BaseMesh");
+	BaseMesh->SetupAttachment(RootComponent);
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("Spring Arm");
-	SpringArm->SetupAttachment(Root);
+	SpringArm->SetupAttachment(RootComponent);
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
 	CameraComponent->SetupAttachment(SpringArm);
@@ -31,6 +31,7 @@ ACharacterPawn::ACharacterPawn()
 void ACharacterPawn::BeginPlay()
 {
 	Super::BeginPlay();
+	//Jump();
 	
 }
 

@@ -17,7 +17,6 @@ AMovingPlatform::AMovingPlatform()
 void AMovingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
-	BoundingBox = GetComponentsBoundingBox(false, false);
 }
 
 void AMovingPlatform::Tick(float DeltaTime)

@@ -37,18 +37,22 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ABaseMover> MedPackBP;
 
+	UPROPERTY()
+	AEndlessRunnerGameModeBase* GameMode;
+
 	TArray<FVector> PosArray;
 
 	TArray<int> PatternOne = {Obstacle, Obstacle, Obstacle, Coin, Coin, MedPack};
 
 private:
-	
-	void SpawnObstacleWave();
 	void InitializeSpawnPositions();
 
 public:
 	// Sets default values for this actor's properties
 	AObstacleSpawner();
+	
+	UFUNCTION(BlueprintCallable)
+	void SpawnObstacleWave();
 
 protected:
 	// Called when the game starts or when spawned

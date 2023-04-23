@@ -6,6 +6,8 @@
 #include "MovingPlatform.h"
 #include "Obstacle.h"
 #include "Algo/RandomShuffle.h"
+#include "EntitySystem/MovieSceneEntitySystemRunner.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -13,6 +15,7 @@ AObstacleSpawner::AObstacleSpawner()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
 }
 
 void AObstacleSpawner::InitializeSpawnPositions()
@@ -35,11 +38,10 @@ void AObstacleSpawner::InitializeSpawnPositions()
 void AObstacleSpawner::BeginPlay()
 {
 	Super::BeginPlay();
-
+	GameMode = Cast<AEndlessRunnerGameModeBase>(GetWorld()->GetAuthGameMode());
 	InitializeSpawnPositions();
-
 	SpawnObstacleWave();
-
+	Algo::RandomShuffle(PatternOne);
 	
 }
 
@@ -47,11 +49,11 @@ void AObstacleSpawner::BeginPlay()
 void AObstacleSpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
 }
 
 void AObstacleSpawner::SpawnObstacleWave()
 {
-	Algo::RandomShuffle(PatternOne);
 	for (int i = 0; i < PosArray.Num(); i++)
 	{
 		switch (PatternOne[i])
@@ -65,4 +67,5 @@ void AObstacleSpawner::SpawnObstacleWave()
 			default: break;
 		}
 	}
+	Algo::RandomShuffle(PatternOne);
 }

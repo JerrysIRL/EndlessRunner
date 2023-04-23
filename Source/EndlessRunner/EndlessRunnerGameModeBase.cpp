@@ -3,11 +3,16 @@
 
 #include "EndlessRunnerGameModeBase.h"
 
+#include "ObstacleSpawner.h"
+#include "Kismet/GameplayStatics.h"
+
 
 void AEndlessRunnerGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
 	SpawnInitialPlatforms();
+	AActor* FoundActor = UGameplayStatics::GetActorOfClass(GetWorld(), AObstacleSpawner::StaticClass());
+	ObstacleSpawner = Cast<AObstacleSpawner>(FoundActor);
 }
 
 void AEndlessRunnerGameModeBase::MovePlatform(AActor* Platform, FVector Position)
@@ -15,6 +20,8 @@ void AEndlessRunnerGameModeBase::MovePlatform(AActor* Platform, FVector Position
 	Platform->SetActorLocation(Position);
 	AMovingPlatform* temp = Cast<AMovingPlatform>(Platform);
 	SetNextPlatform(temp);
+	MovedPlatformCount++;
+	SpawnObstacleWave();
 }
 
 FVector AEndlessRunnerGameModeBase::GetSpawningPosition() const
@@ -26,17 +33,12 @@ void AEndlessRunnerGameModeBase::SpawnPlatform(FVector SpawnPos)
 {
 	UWorld* World = GetWorld();
 	AMovingPlatform* PlatformPtr = World->SpawnActor<AMovingPlatform>(MovingPlatformBP, SpawnPos, FRotator());
- 	SetNextPlatform(PlatformPtr);
+	SetNextPlatform(PlatformPtr);
 }
 
 void AEndlessRunnerGameModeBase::SetNextPlatform(AMovingPlatform* Platform)
 {
 	LastPlatform = Platform;
-}
-
-float AEndlessRunnerGameModeBase::GetMoveSpeed()
-{
-	return MoveSpeed;
 }
 
 void AEndlessRunnerGameModeBase::SpawnInitialPlatforms()
@@ -46,4 +48,18 @@ void AEndlessRunnerGameModeBase::SpawnInitialPlatforms()
 	{
 		SpawnPlatform(GetSpawningPosition());
 	}
+}
+
+void AEndlessRunnerGameModeBase::SpawnObstacleWave()
+{
+	if (MovedPlatformCount == AmountOfPlatformsToPass)
+	{
+		ObstacleSpawner->SpawnObstacleWave();
+		MovedPlatformCount = 0;
+	}
+}
+
+float AEndlessRunnerGameModeBase::GetMoveSpeed() const
+{
+	return MoveSpeed;
 }

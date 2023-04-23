@@ -8,6 +8,7 @@
 #include "EndlessRunnerGameModeBase.generated.h"
 
 
+class AObstacleSpawner;
 /**
  * 
  */
@@ -17,20 +18,27 @@ class ENDLESSRUNNER_API AEndlessRunnerGameModeBase : public AGameModeBase
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category="ActorSpawning")
+	UPROPERTY(EditDefaultsOnly, Category="Actor Spawning")
 	TSubclassOf<AMovingPlatform> MovingPlatformBP;
-	
 
 	UPROPERTY(EditAnywhere)
 	float MoveSpeed = -500;
-	
+
+	UPROPERTY(EditAnywhere, Category="Obstacle Spawner")
+	int AmountOfPlatformsToPass = 5;
 	UPROPERTY()
 	AMovingPlatform* LastPlatform;
-	
-	FVector NextSpawningPosition;
+
+	UPROPERTY()
+	AObstacleSpawner* ObstacleSpawner;
 
 	UPROPERTY(EditAnywhere)
 	int StartingAmount = 10;
+	
+	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
+	int MovedPlatformCount = 0;
+	
+	FVector NextSpawningPosition;
 
 private:
 	UFUNCTION(BlueprintCallable)
@@ -42,14 +50,16 @@ public:
 
 	UFUNCTION()
 	FVector GetSpawningPosition() const;
-	
+
 	UFUNCTION(BlueprintCallable)
 	void SetNextPlatform(AMovingPlatform* Platform);
 
-	float GetMoveSpeed();
+	float GetMoveSpeed() const;
+
 
 protected:
 	void SpawnInitialPlatforms();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	void SpawnObstacleWave();
 };

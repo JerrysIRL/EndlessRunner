@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameFramework/Character.h"
 #include "GameFramework/Pawn.h"
 #include "CharacterPawn.generated.h"
 
@@ -19,7 +20,7 @@ private:
 	USceneComponent* Root;
 	
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* Mesh;
+	UStaticMeshComponent* BaseMesh;
 	
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArm;

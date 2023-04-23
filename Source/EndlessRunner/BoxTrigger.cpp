@@ -28,6 +28,10 @@ void UBoxTrigger::OnComponentOverlap(UPrimitiveComponent* OverlappedComp, AActor
 		FVector MovePos = GameModeRef->GetSpawningPosition();
 		GameModeRef->MovePlatform(OtherActor, MovePos);
 	}
+	if(OtherActor->ActorHasTag("Obstacle"))
+	{
+		GetWorld()->DestroyActor(OtherActor);
+	}
 }
 
 
