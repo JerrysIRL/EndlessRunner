@@ -41,21 +41,20 @@ void ACharacterPawn::BeginPlay()
 void ACharacterPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
 void ACharacterPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	/*Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAxis("Move Right / Left", this, &ACharacterPawn::Move );
 	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &ACharacterPawn::Crouch);
 	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &ACharacterPawn::ResetRot);
+	*/
 	
-
 }
 
-void ACharacterPawn::Move(float Value)
+/*void ACharacterPawn::Move(float Value)
 {
 	FVector MovementVector = FVector(0, Value * MovementSpeed * GetWorld()->GetDeltaSeconds(),0);
 	AddActorLocalOffset(MovementVector, true);
@@ -70,4 +69,4 @@ void ACharacterPawn::Crouch()
 void ACharacterPawn::ResetRot()
 {
 	CapsuleComponent->AddLocalRotation(FRotator(90,0,0));
-}
+}*/

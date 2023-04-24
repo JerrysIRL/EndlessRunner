@@ -15,6 +15,21 @@ public:
 	// Sets default values for this character's properties
 	AExtendedPawn();
 
+private:
+	UPROPERTY(EditAnywhere)
+	float MovementSpeed = 50;
+
+
+private:
+	void Move(float Value);
+
+	void CharCrouch();
+
+	void ResetRot();
+	
+	void DoJump();
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

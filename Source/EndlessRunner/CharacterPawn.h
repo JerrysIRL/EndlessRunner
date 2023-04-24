@@ -34,11 +34,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	float MovementSpeed = 50;
 
-	UPROPERTY(EditAnywhere)
-	float MinValue;
-
-	UPROPERTY(EditAnywhere)
-	float MaxValue;
 
 	void Move(float Value);
 

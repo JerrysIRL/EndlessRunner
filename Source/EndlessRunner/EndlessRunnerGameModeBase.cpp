@@ -52,12 +52,11 @@ void AEndlessRunnerGameModeBase::SpawnInitialPlatforms()
 
 void AEndlessRunnerGameModeBase::SpawnObstacleWave()
 {
-	if (MovedPlatformCount == AmountOfPlatformsToPass)
+	if (MovedPlatformCount % AmountOfPlatformsToPass == 0)
 	{
 		ObstacleSpawner->SpawnObstacleWave();
-		MovedPlatformCount = 0;
 	}
-}
+}	
 
 float AEndlessRunnerGameModeBase::GetMoveSpeed() const
 {

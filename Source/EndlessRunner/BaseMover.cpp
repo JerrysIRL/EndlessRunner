@@ -4,6 +4,7 @@
 #include "BaseMover.h"
 
 #include "EndlessRunnerGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABaseMover::ABaseMover()
