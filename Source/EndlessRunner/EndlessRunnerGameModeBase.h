@@ -26,7 +26,7 @@ private:
 	
 	UPROPERTY(EditAnywhere, Category="GameSpeed")
 	float SpeedLimit= -2000;
-	//
+	
 	UPROPERTY(EditAnywhere, Category="GameSpeed")
 	float SpeedIncrease = 30;
 	/** Timer delay in seconds for the Speed increase */

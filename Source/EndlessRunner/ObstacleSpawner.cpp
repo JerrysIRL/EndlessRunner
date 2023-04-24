@@ -39,7 +39,7 @@ void AObstacleSpawner::BeginPlay()
 	Super::BeginPlay();
 	GameMode = Cast<AEndlessRunnerGameModeBase>(GetWorld()->GetAuthGameMode());
 	InitializeSpawnPositions();
-	SpawnObstacleWave();
+	//SpawnObstacleWave();
 	
 }
 
@@ -57,11 +57,11 @@ void AObstacleSpawner::SpawnObstacleWave()
 		switch (PatternOne[i])
 		{
 			case Obstacle:
-				GetWorld()->SpawnActor<AObstacle>(ObstacleBP, PosArray[i], FRotator()); break;
+				GetWorld()->SpawnActor<AObstacle>(ObstacleBP, PosArray[i], FRotator(0)); break;
 			case Coin:
-				GetWorld()->SpawnActor<ABaseMover>(CoinBP, PosArray[i], FRotator()); break;
+				GetWorld()->SpawnActor<ABaseMover>(CoinBP, PosArray[i], FRotator(0)); break;
 			case MedPack:
-				GetWorld()->SpawnActor<ABaseMover>(MedPackBP, PosArray[i], FRotator()); break;
+				GetWorld()->SpawnActor<ABaseMover>(MedPackBP, PosArray[i], FRotator(0)); break;
 			default: break;
 		}
 	}
