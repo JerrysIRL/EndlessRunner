@@ -39,7 +39,7 @@ void AObstacleSpawner::BeginPlay()
 	Super::BeginPlay();
 	GameMode = Cast<AEndlessRunnerGameModeBase>(GetWorld()->GetAuthGameMode());
 	InitializeSpawnPositions();
-	//SpawnObstacleWave();
+	SpawnObstacleWave();
 	
 }
 

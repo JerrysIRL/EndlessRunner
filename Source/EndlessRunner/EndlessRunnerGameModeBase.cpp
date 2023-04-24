@@ -11,6 +11,7 @@ void AEndlessRunnerGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
 	SpawnInitialPlatforms();
+	
 	AActor* FoundActor = UGameplayStatics::GetActorOfClass(GetWorld(), AObstacleSpawner::StaticClass());
 	ObstacleSpawner = Cast<AObstacleSpawner>(FoundActor);
 	
