@@ -17,7 +17,7 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float MovementSpeed = 50;
+	float MovementSpeed = 50; 
 
 
 private:

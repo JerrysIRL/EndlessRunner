@@ -20,12 +20,22 @@ class ENDLESSRUNNER_API AEndlessRunnerGameModeBase : public AGameModeBase
 private:
 	UPROPERTY(EditDefaultsOnly, Category="Actor Spawning")
 	TSubclassOf<AMovingPlatform> MovingPlatformBP;
-
-	UPROPERTY(EditAnywhere)
+	
+	UPROPERTY(EditAnywhere, Category="GameSpeed")
 	float MoveSpeed = -500;
+	
+	UPROPERTY(EditAnywhere, Category="GameSpeed")
+	float SpeedLimit= -2000;
+	//
+	UPROPERTY(EditAnywhere, Category="GameSpeed")
+	float SpeedIncrease = 30;
+	/** Timer delay in seconds for the Speed increase */
+	UPROPERTY(EditAnywhere, Category="GameSpeed")
+	float SpeedIncreaseRate= 2;
 
 	UPROPERTY(EditAnywhere, Category="Obstacle Spawner")
 	int AmountOfPlatformsToPass = 5;
+	
 	UPROPERTY()
 	AMovingPlatform* LastPlatform;
 
@@ -40,11 +50,18 @@ private:
 	
 	FVector NextSpawningPosition;
 
+	FTimerHandle SpeedTimerHandle;
+
 private:
+	
 	UFUNCTION(BlueprintCallable)
 	void SpawnPlatform(FVector SpawnPos);
 
+	UFUNCTION()
+	void AddSpeed();
+
 public:
+	
 	UFUNCTION(BlueprintCallable)
 	void MovePlatform(AActor* Platform, FVector Position);
 

@@ -6,8 +6,7 @@
 #include "MovingPlatform.h"
 #include "Obstacle.h"
 #include "Algo/RandomShuffle.h"
-#include "EntitySystem/MovieSceneEntitySystemRunner.h"
-#include "Kismet/GameplayStatics.h"
+
 
 
 // Sets default values
@@ -41,7 +40,6 @@ void AObstacleSpawner::BeginPlay()
 	GameMode = Cast<AEndlessRunnerGameModeBase>(GetWorld()->GetAuthGameMode());
 	InitializeSpawnPositions();
 	SpawnObstacleWave();
-	Algo::RandomShuffle(PatternOne);
 	
 }
 

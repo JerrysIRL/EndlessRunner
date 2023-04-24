@@ -38,6 +38,7 @@ void AExtendedPawn::DoJump()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Jumping!"));
 	Jump();
+	
 }
 
 void AExtendedPawn::Move(float Value)
