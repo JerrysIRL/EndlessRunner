@@ -4,6 +4,7 @@
 #include "EndlessRunnerGameModeBase.h"
 #include "ObstacleSpawner.h"
 #include "Kismet/GameplayStatics.h"
+#include "MovingPlatform.h"
 
 
 
@@ -15,7 +16,7 @@ void AEndlessRunnerGameModeBase::BeginPlay()
 	AActor* FoundActor = UGameplayStatics::GetActorOfClass(GetWorld(), AObstacleSpawner::StaticClass());
 	ObstacleSpawner = Cast<AObstacleSpawner>(FoundActor);
 	
-	GetWorldTimerManager().SetTimer(SpeedTimerHandle,this, &AEndlessRunnerGameModeBase::AddSpeed, 2, true);
+	GetWorldTimerManager().SetTimer(SpeedTimerHandle,this, &AEndlessRunnerGameModeBase::AddSpeed, SpeedIncreaseRate, true);
 }
 
 void AEndlessRunnerGameModeBase::MovePlatform(AActor* Platform, FVector Position)
@@ -56,9 +57,10 @@ void AEndlessRunnerGameModeBase::SpawnInitialPlatforms()
 
 void AEndlessRunnerGameModeBase::SpawnObstacleWave()
 {
-	if (MovedPlatformCount % AmountOfPlatformsToPass == 0)
+	if (MovedPlatformCount == AmountOfPlatformsToPass)
 	{
 		ObstacleSpawner->SpawnObstacleWave();
+		MovedPlatformCount = 0;
 	}
 }	
 
@@ -70,10 +72,8 @@ float AEndlessRunnerGameModeBase::GetMoveSpeed() const
 void AEndlessRunnerGameModeBase::AddSpeed()
 {
 	MoveSpeed -= SpeedIncrease;
-	UE_LOG(LogTemp, Warning, TEXT("Current Speed %f"), MoveSpeed);
 	if(MoveSpeed <= SpeedLimit)
 	{
 		GetWorldTimerManager().ClearTimer(SpeedTimerHandle);
-		UE_LOG(LogTemp, Warning, TEXT("Reached maxSpeed"));
 	}
 }

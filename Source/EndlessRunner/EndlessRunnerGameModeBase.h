@@ -4,15 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "MovingPlatform.h"
+#include "Engine/EngineTypes.h"
 #include "EndlessRunnerGameModeBase.generated.h"
 
 
+
 class AObstacleSpawner;
-/**
- * 
- */
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+class AMovingPlatform;
+
+UCLASS(Blueprintable, BlueprintType)
 class ENDLESSRUNNER_API AEndlessRunnerGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
@@ -58,6 +58,9 @@ private:
 	void SpawnPlatform(FVector SpawnPos);
 
 	UFUNCTION()
+	void SpawnObstacleWave();
+	
+	UFUNCTION()
 	void AddSpeed();
 
 public:
@@ -78,5 +81,5 @@ protected:
 	void SpawnInitialPlatforms();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	void SpawnObstacleWave();
+	
 };
