@@ -3,6 +3,8 @@
 
 #include "CollisionHandler.h"
 
+#include "Kismet/GameplayStatics.h"
+
 
 // Sets default values for this component's properties
 UCollisionHandler::UCollisionHandler()
@@ -13,7 +15,6 @@ UCollisionHandler::UCollisionHandler()
 
 	// ...
 }
-
 
 // Called when the game starts
 void UCollisionHandler::BeginPlay()
@@ -33,35 +34,33 @@ void UCollisionHandler::TickComponent(float DeltaTime, ELevelTick TickType,
                                      FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	PointsEarned += DeltaTime;
 
 	// ...
 }
 
 void UCollisionHandler::ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	
-	CurrentHealth = FMath::Clamp(CurrentHealth, 0, 2);
 	if (OtherActor->ActorHasTag("Obstacle"))
 	{
 		CurrentHealth -= 1;
-		UE_LOG(LogTemp, Warning, TEXT("Current health : %d"), CurrentHealth);
 		OtherActor->Destroy();
 	}
 	if (OtherActor->ActorHasTag("Coin"))
 	{
 		CoinsCollected += 1;
-		UE_LOG(LogTemp, Warning, TEXT("Coins Collected : %d"), CoinsCollected);
+		PointsEarned += 10;
 		OtherActor->Destroy();
 	}
 	if (OtherActor->ActorHasTag("MedPack"))
 	{
 		CurrentHealth += 1;
-		UE_LOG(LogTemp, Warning, TEXT("CurrentH : %d"),CurrentHealth);
 		OtherActor->Destroy();
 	}
 	if (CurrentHealth <= 0)
 	{
 		GetOwner()->Destroy();
-		
 	}
+	CurrentHealth = FMath::Clamp(CurrentHealth, 0, 3);
 }
+

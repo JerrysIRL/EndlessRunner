@@ -23,11 +23,17 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
 	int CoinsCollected = 0;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
+	float PointsEarned = 0;
+
 	UFUNCTION()
 	void ActorBeginOverlap( AActor* OverlappedActor, AActor* OtherActor);
+
+	
 public:	
 	// Sets default values for this component's properties
 	UCollisionHandler();
+	
 
 protected:
 	// Called when the game starts
