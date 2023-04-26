@@ -23,6 +23,7 @@ void ABaseMover::BeginPlay()
 {
 	Super::BeginPlay();
 	GameMode = Cast<AEndlessRunnerGameModeBase>(GetWorld()->GetAuthGameMode());
+		
 }
 
 // Called every frame
@@ -35,6 +36,10 @@ void ABaseMover::Tick(float DeltaTime)
 
 void ABaseMover::MoveObstacle(float DeltaTime)
 {
+	if(GameMode == nullptr)
+	{
+		return;
+	}
 	FVector CurrentLocation = GetActorLocation();
 	float PlatformSpeed = GameMode->GetMoveSpeed();
 	

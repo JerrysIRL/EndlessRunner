@@ -8,6 +8,8 @@
 #include "CollisionHandler.generated.h"
 
 
+class AExtendedPawn;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ENDLESSRUNNER_API UCollisionHandler : public UActorComponent
 {
@@ -28,12 +30,18 @@ private:
 
 	UFUNCTION()
 	void ActorBeginOverlap( AActor* OverlappedActor, AActor* OtherActor);
+	
+	void CheckForDeath();
+	
+	float FinalScore = 0;
+
+	UPROPERTY()
+	AExtendedPawn* Owner;
 
 	
 public:	
 	// Sets default values for this component's properties
 	UCollisionHandler();
-	
 
 protected:
 	// Called when the game starts

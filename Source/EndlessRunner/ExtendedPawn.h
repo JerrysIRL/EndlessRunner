@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "ExtendedPawn.generated.h"
 
+class AEndlessRunnerGameModeBase;
+
 UCLASS()
 class ENDLESSRUNNER_API AExtendedPawn : public ACharacter
 {
@@ -15,10 +17,12 @@ public:
 	// Sets default values for this character's properties
 	AExtendedPawn();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	AEndlessRunnerGameModeBase* GameModeRef;
+
 private:
 	UPROPERTY(EditAnywhere)
-	float MovementSpeed = 50; 
-
+	float MovementSpeed = 50;
 
 private:
 	void Move(float Value);
@@ -26,19 +30,17 @@ private:
 	void CharCrouch();
 
 	void ResetRot();
-	
-	void DoJump();
 
+	void DoJump();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 };

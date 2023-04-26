@@ -33,6 +33,11 @@ FVector AEndlessRunnerGameModeBase::GetSpawningPosition() const
 	return LastPlatform->GetSpawnPointLocation();
 }
 
+void AEndlessRunnerGameModeBase::GameOverEvent_Implementation()
+{
+	
+}
+
 void AEndlessRunnerGameModeBase::SpawnPlatform(FVector SpawnPos)
 {
 	UWorld* World = GetWorld();
@@ -45,6 +50,7 @@ void AEndlessRunnerGameModeBase::SetNextPlatform(AMovingPlatform* Platform)
 {
 	LastPlatform = Platform;
 }
+
 
 void AEndlessRunnerGameModeBase::SpawnInitialPlatforms()
 {
@@ -76,4 +82,16 @@ void AEndlessRunnerGameModeBase::AddSpeed()
 	{
 		GetWorldTimerManager().ClearTimer(SpeedTimerHandle);
 	}
+}
+
+void AEndlessRunnerGameModeBase::SetFinalScore(float Score)
+{
+	FinalScore = Score;
+}
+
+TArray<int> AEndlessRunnerGameModeBase::SortHighScores(TArray<int> ArrayToSort)
+{
+	TArray<int> temp = ArrayToSort;
+	Algo::Sort(temp);
+	return temp;
 }

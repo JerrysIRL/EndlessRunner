@@ -48,6 +48,10 @@ private:
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
 	int MovedPlatformCount = 0;
 	
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
+	float FinalScore;
+	
 	FVector NextSpawningPosition;
 
 	FTimerHandle SpeedTimerHandle;
@@ -63,7 +67,12 @@ private:
 	UFUNCTION()
 	void AddSpeed();
 
+	UFUNCTION(BlueprintPure)
+	TArray<int> SortHighScores(TArray<int> ArrayToSort);
+
 public:
+	UFUNCTION(BlueprintNativeEvent)
+	void GameOverEvent();
 	
 	UFUNCTION(BlueprintCallable)
 	void MovePlatform(AActor* Platform, FVector Position);
@@ -74,6 +83,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetNextPlatform(AMovingPlatform* Platform);
 
+	void SetFinalScore(float Score);
+	
 	float GetMoveSpeed() const;
 
 

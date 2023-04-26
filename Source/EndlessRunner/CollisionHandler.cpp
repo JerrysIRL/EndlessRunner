@@ -3,6 +3,8 @@
 
 #include "CollisionHandler.h"
 
+#include "EndlessRunnerGameModeBase.h"
+#include "ExtendedPawn.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -20,28 +22,26 @@ UCollisionHandler::UCollisionHandler()
 void UCollisionHandler::BeginPlay()
 {
 	Super::BeginPlay();
+	Owner = Cast<AExtendedPawn>(GetOwner());
 	CurrentHealth = MaxHealthAmount;
-	//CurrentHealth = FMath::Clamp(CurrentHealth, 0, 2);
-	
+
 	GetOwner()->OnActorBeginOverlap.AddDynamic(this, &UCollisionHandler::ActorBeginOverlap);
-	//GetOwner()->OnActorHit.
+
 	// ...
 }
 
 
 // Called every frame
 void UCollisionHandler::TickComponent(float DeltaTime, ELevelTick TickType,
-                                     FActorComponentTickFunction* ThisTickFunction)
+                                      FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	PointsEarned += DeltaTime;
-
-	// ...
 }
 
 void UCollisionHandler::ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	if (OtherActor->ActorHasTag("Obstacle"))
+	if (OtherActor->ActorHasTag("Obstacle")) 
 	{
 		CurrentHealth -= 1;
 		OtherActor->Destroy();
@@ -57,10 +57,17 @@ void UCollisionHandler::ActorBeginOverlap(AActor* OverlappedActor, AActor* Other
 		CurrentHealth += 1;
 		OtherActor->Destroy();
 	}
-	if (CurrentHealth <= 0)
-	{
-		GetOwner()->Destroy();
-	}
+	CheckForDeath();
 	CurrentHealth = FMath::Clamp(CurrentHealth, 0, 3);
 }
 
+void UCollisionHandler::CheckForDeath()
+{
+	if (CurrentHealth <= 0)
+	{
+		FinalScore = PointsEarned;
+		Owner->GameModeRef->SetFinalScore(FinalScore);
+		Owner->GameModeRef->GameOverEvent();
+		GetOwner()->Destroy();
+	}
+}

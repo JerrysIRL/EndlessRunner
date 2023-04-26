@@ -3,7 +3,8 @@
 
 #include "ExtendedPawn.h"
 
-#include "Components/CapsuleComponent.h"
+#include "EndlessRunnerGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AExtendedPawn::AExtendedPawn()
@@ -16,6 +17,7 @@ AExtendedPawn::AExtendedPawn()
 void AExtendedPawn::BeginPlay()
 {
 	Super::BeginPlay();
+	GameModeRef = Cast<AEndlessRunnerGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 }
 
 // Called every frame
@@ -36,9 +38,7 @@ void AExtendedPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 void AExtendedPawn::DoJump()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Jumping!"));
 	Jump();
-	
 }
 
 void AExtendedPawn::Move(float Value)
