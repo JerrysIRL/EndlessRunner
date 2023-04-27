@@ -33,10 +33,6 @@ FVector AEndlessRunnerGameModeBase::GetSpawningPosition() const
 	return LastPlatform->GetSpawnPointLocation();
 }
 
-void AEndlessRunnerGameModeBase::GameOverEvent_Implementation()
-{
-	
-}
 
 void AEndlessRunnerGameModeBase::SpawnPlatform(FVector SpawnPos)
 {
@@ -94,4 +90,9 @@ TArray<int> AEndlessRunnerGameModeBase::SortHighScores(TArray<int> ArrayToSort)
 	TArray<int> temp = ArrayToSort;
 	Algo::Sort(temp);
 	return temp;
+}
+
+void AEndlessRunnerGameModeBase::GameOverEvent_Implementation()
+{
+	
 }

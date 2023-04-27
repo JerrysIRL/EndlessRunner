@@ -66,5 +66,4 @@ void AObstacleSpawner::SpawnObstacleWave()
 		}
 	}
 	Algo::RandomShuffle(PatternOne);
-	Algo::Sort(PatternOne);
 }
