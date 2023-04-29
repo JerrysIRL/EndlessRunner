@@ -47,10 +47,13 @@ private:
 	
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
 	int MovedPlatformCount = 0;
-	
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
 	float FinalScore;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
+	float Score = 0;
+	
 	
 	FVector NextSpawningPosition;
 
@@ -71,6 +74,8 @@ private:
 	TArray<int> SortHighScores(TArray<int> ArrayToSort);
 
 public:
+	AEndlessRunnerGameModeBase();
+	
 	UFUNCTION(BlueprintNativeEvent)
 	void GameOverEvent();
 	
@@ -87,10 +92,14 @@ public:
 	
 	float GetMoveSpeed() const;
 
+	void AddToCurrentScore(float Points);
+
+	float GetScore() const;
 
 protected:
 	void SpawnInitialPlatforms();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
+	void Tick(float DeltaTime) override;
 };

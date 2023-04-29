@@ -8,6 +8,7 @@
 #include "CollisionHandler.generated.h"
 
 
+class AEndlessRunnerGameModeBase;
 class AExtendedPawn;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -22,21 +23,14 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
 	int CurrentHealth;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
-	int CoinsCollected = 0;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
-	float PointsEarned = 0;
-
 	UFUNCTION()
 	void ActorBeginOverlap( AActor* OverlappedActor, AActor* OtherActor);
 	
-	void CheckForDeath();
-	
-	float FinalScore = 0;
-
 	UPROPERTY()
 	AExtendedPawn* Owner;
+	
+	void CheckForDeath();
+	
 
 	
 public:	

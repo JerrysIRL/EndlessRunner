@@ -36,7 +36,7 @@ void UCollisionHandler::TickComponent(float DeltaTime, ELevelTick TickType,
                                       FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	PointsEarned += DeltaTime;
+	
 }
 
 void UCollisionHandler::ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
@@ -48,8 +48,7 @@ void UCollisionHandler::ActorBeginOverlap(AActor* OverlappedActor, AActor* Other
 	}
 	if (OtherActor->ActorHasTag("Coin"))
 	{
-		CoinsCollected += 1;
-		PointsEarned += 10;
+		Owner->GameModeRef->AddToCurrentScore(10);
 		OtherActor->Destroy();
 	}
 	if (OtherActor->ActorHasTag("MedPack"))
@@ -65,9 +64,9 @@ void UCollisionHandler::CheckForDeath()
 {
 	if (CurrentHealth <= 0)
 	{
-		FinalScore = PointsEarned;
-		Owner->GameModeRef->SetFinalScore(FinalScore);
-		Owner->GameModeRef->GameOverEvent();
+		auto GmRef = Owner->GameModeRef;
+		GmRef->SetFinalScore(GmRef->GetScore());
+		GmRef->GameOverEvent();
 		GetOwner()->Destroy();
 	}
 }

@@ -6,7 +6,10 @@
 #include "Kismet/GameplayStatics.h"
 #include "MovingPlatform.h"
 
-
+AEndlessRunnerGameModeBase::AEndlessRunnerGameModeBase()
+{
+	PrimaryActorTick.bCanEverTick = true;
+}
 
 void AEndlessRunnerGameModeBase::BeginPlay()
 {
@@ -17,6 +20,13 @@ void AEndlessRunnerGameModeBase::BeginPlay()
 	ObstacleSpawner = Cast<AObstacleSpawner>(FoundActor);
 	
 	GetWorldTimerManager().SetTimer(SpeedTimerHandle,this, &AEndlessRunnerGameModeBase::AddSpeed, SpeedIncreaseRate, true);
+}
+
+void AEndlessRunnerGameModeBase::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	Score += DeltaTime;
+	
 }
 
 void AEndlessRunnerGameModeBase::MovePlatform(AActor* Platform, FVector Position)
@@ -71,6 +81,12 @@ float AEndlessRunnerGameModeBase::GetMoveSpeed() const
 	return MoveSpeed;
 }
 
+void AEndlessRunnerGameModeBase::AddToCurrentScore(float Points)
+{
+	Score += Points;
+}
+
+
 void AEndlessRunnerGameModeBase::AddSpeed()
 {
 	MoveSpeed -= SpeedIncrease;
@@ -80,9 +96,9 @@ void AEndlessRunnerGameModeBase::AddSpeed()
 	}
 }
 
-void AEndlessRunnerGameModeBase::SetFinalScore(float Score)
+void AEndlessRunnerGameModeBase::SetFinalScore(float ScoreToAdd)
 {
-	FinalScore = Score;
+	FinalScore = ScoreToAdd;
 }
 
 TArray<int> AEndlessRunnerGameModeBase::SortHighScores(TArray<int> ArrayToSort)
@@ -90,6 +106,11 @@ TArray<int> AEndlessRunnerGameModeBase::SortHighScores(TArray<int> ArrayToSort)
 	TArray<int> temp = ArrayToSort;
 	Algo::Sort(temp);
 	return temp;
+}
+
+float AEndlessRunnerGameModeBase::GetScore() const
+{
+	return Score;
 }
 
 void AEndlessRunnerGameModeBase::GameOverEvent_Implementation()

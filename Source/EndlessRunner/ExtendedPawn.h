@@ -25,13 +25,15 @@ private:
 	float MovementSpeed = 50;
 
 private:
+	UFUNCTION(BlueprintCallable, meta=(AllowPrivateAccess = "true"))
 	void Move(float Value);
 
+	UFUNCTION(BlueprintCallable, meta=(AllowPrivateAccess = "true"))
 	void CharCrouch();
 
+	UFUNCTION(BlueprintCallable, meta=(AllowPrivateAccess = "true"))
 	void ResetRot();
 
-	void DoJump();
 
 protected:
 	// Called when the game starts or when spawned

@@ -30,14 +30,9 @@ void AExtendedPawn::Tick(float DeltaTime)
 void AExtendedPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	//UGameplayStatics::GetPlayerController(GetWorld(), 0 );
 	
-	auto ControllerOne = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	 //UE_LOG(LogTemp, Warning, TEXT("My name is  %s"), *ControllerOne->GetActorNameOrLabel());
-	auto ControllerTwo = UGameplayStatics::GetPlayerController(GetWorld(), 1);
-	//UE_LOG(LogTemp, Warning, TEXT("My name is  %s"), *ControllerTwo->GetActorNameOrLabel());
-	//if (GetController() == ControllerOne)
+	
+	/*if (ActorHasTag("Player1"))
 	{
 		PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AExtendedPawn::CharCrouch);
 		PlayerInputComponent->BindAction("Crouch", IE_Released, this, &AExtendedPawn::ResetRot);
@@ -45,18 +40,13 @@ void AExtendedPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 		PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AExtendedPawn::DoJump);
 	}
 	
-	/*if (GetController() == ControllerTwo)
+	if (ActorHasTag("Player2"))
 	{
 		PlayerInputComponent->BindAction("CrouchP2", IE_Pressed, this, &AExtendedPawn::CharCrouch);
 		PlayerInputComponent->BindAction("CrouchP2", IE_Released, this, &AExtendedPawn::ResetRot);
 		PlayerInputComponent->BindAxis("Move Right/LeftP2", this, &AExtendedPawn::Move);
 		PlayerInputComponent->BindAction("JumpP2", IE_Pressed, this, &AExtendedPawn::DoJump);
 	}*/
-}
-
-void AExtendedPawn::DoJump()
-{
-	Jump();
 }
 
 void AExtendedPawn::Move(float Value)
