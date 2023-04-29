@@ -40,16 +40,26 @@ private:
 	UPROPERTY()
 	AEndlessRunnerGameModeBase* GameMode;
 
+	TArray<int> ReturnRandomWave();
+
 	TArray<FVector> PosArray;
 
+	TArray<TArray<int>> PatternsArray;
 	TArray<int> PatternOne = {Obstacle, Obstacle, Obstacle, Coin, Coin, MedPack};
+	TArray<int> PatternTwo = {Obstacle, Obstacle,Obstacle,Obstacle, Coin, Coin};
+	TArray<int> PatternThree ={Obstacle, Obstacle,Obstacle,Obstacle, Obstacle, MedPack};
+	TArray<int> CoinsOnlyWave = {Coin, Coin, Coin, Coin, Coin, Coin};
 
 private:
 	void InitializeSpawnPositions();
 
+	
+
 public:
 	// Sets default values for this actor's properties
 	AObstacleSpawner();
+	UFUNCTION()
+	void SpawnCoinWave();
 	
 	UFUNCTION(BlueprintCallable)
 	void SpawnObstacleWave();

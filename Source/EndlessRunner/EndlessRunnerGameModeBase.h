@@ -53,7 +53,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess="true"))
 	float Score = 0;
-	
+
+	bool DodgedLastWave = false;
 	
 	FVector NextSpawningPosition;
 
@@ -76,6 +77,7 @@ private:
 public:
 	AEndlessRunnerGameModeBase();
 	
+	
 	UFUNCTION(BlueprintNativeEvent)
 	void GameOverEvent();
 	
@@ -87,6 +89,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetNextPlatform(AMovingPlatform* Platform);
+
+	void SetDodgedWaveBool(bool value);
 
 	void SetFinalScore(float Score);
 	

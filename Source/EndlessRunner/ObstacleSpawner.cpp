@@ -17,6 +17,7 @@ AObstacleSpawner::AObstacleSpawner()
 	
 }
 
+
 void AObstacleSpawner::InitializeSpawnPositions()
 {
 	FBox Box = PlatformRef->GetComponentsBoundingBox(false, false);
@@ -37,7 +38,12 @@ void AObstacleSpawner::InitializeSpawnPositions()
 void AObstacleSpawner::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	GameMode = Cast<AEndlessRunnerGameModeBase>(GetWorld()->GetAuthGameMode());
+	PatternsArray.Add(PatternOne);
+	PatternsArray.Add(PatternTwo);
+	PatternsArray.Add(PatternThree);
+	//UE_LOG(LogTemp, Warning, TEXT("num : %d"), PatternsArray.Num() );
 	InitializeSpawnPositions();
 	SpawnObstacleWave();
 	
@@ -52,9 +58,10 @@ void AObstacleSpawner::Tick(float DeltaTime)
 
 void AObstacleSpawner::SpawnObstacleWave()
 {
+	auto WaveToSpawn = ReturnRandomWave();
 	for (int i = 0; i < PosArray.Num(); i++)
 	{
-		switch (PatternOne[i])
+		switch (WaveToSpawn[i])
 		{
 			case Obstacle:
 				GetWorld()->SpawnActor<AObstacle>(ObstacleBP, PosArray[i], FRotator(0)); break;
@@ -65,5 +72,21 @@ void AObstacleSpawner::SpawnObstacleWave()
 			default: break;
 		}
 	}
-	Algo::RandomShuffle(PatternOne);
 }
+
+void AObstacleSpawner::SpawnCoinWave()
+{
+	for (int i = 0; i < PosArray.Num(); i++)
+	{
+		GetWorld()->SpawnActor<ABaseMover>(CoinBP, PosArray[i], FRotator(0)); break;
+	}
+}
+
+TArray<int> AObstacleSpawner::ReturnRandomWave()
+{
+	int index = FMath::RandRange(0, PatternsArray.Num()-1);
+	auto ShuffledArray = PatternsArray[index];
+	Algo::RandomShuffle(ShuffledArray);
+	return ShuffledArray;
+}
+	

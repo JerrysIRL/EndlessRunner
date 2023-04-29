@@ -57,6 +57,11 @@ void AEndlessRunnerGameModeBase::SetNextPlatform(AMovingPlatform* Platform)
 	LastPlatform = Platform;
 }
 
+void AEndlessRunnerGameModeBase::SetDodgedWaveBool(bool value)
+{
+	DodgedLastWave = value;
+}
+
 
 void AEndlessRunnerGameModeBase::SpawnInitialPlatforms()
 {

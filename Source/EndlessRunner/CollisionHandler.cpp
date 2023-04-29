@@ -44,6 +44,7 @@ void UCollisionHandler::ActorBeginOverlap(AActor* OverlappedActor, AActor* Other
 	if (OtherActor->ActorHasTag("Obstacle")) 
 	{
 		CurrentHealth -= 1;
+		Owner->GameModeRef->SetDodgedWaveBool(false);
 		OtherActor->Destroy();
 	}
 	if (OtherActor->ActorHasTag("Coin"))
