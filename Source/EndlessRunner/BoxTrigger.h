@@ -7,9 +7,8 @@
 #include "BoxTrigger.generated.h"
 
 class AEndlessRunnerGameModeBase;
-/**
- * 
- */
+
+
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class ENDLESSRUNNER_API UBoxTrigger : public UBoxComponent
 {

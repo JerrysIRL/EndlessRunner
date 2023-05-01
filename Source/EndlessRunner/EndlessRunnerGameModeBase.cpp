@@ -26,15 +26,14 @@ void AEndlessRunnerGameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	Score += DeltaTime;
-	UE_LOG(LogTemp, Warning, TEXT("Dodged : %s"), DodgedLastWave ? TEXT("True") : TEXT("false") );
 	
 }
 
 void AEndlessRunnerGameModeBase::MovePlatform(AActor* Platform, FVector Position)
 {
 	Platform->SetActorLocation(Position);
-	AMovingPlatform* temp = Cast<AMovingPlatform>(Platform);
-	SetNextPlatform(temp);
+	AMovingPlatform* MovingPlatformRef = Cast<AMovingPlatform>(Platform);
+	SetNextPlatform(MovingPlatformRef);
 	MovedPlatformCount++;
 	SpawnObstacleWave();
 }
@@ -79,7 +78,7 @@ void AEndlessRunnerGameModeBase::SpawnObstacleWave()
 	{
 		if(DodgedLastWave == true)
 		{
-			// 20% chance to get all coins wave
+			// 10% chance to get all coins wave
 			int Random = FMath::RandRange(0, 9);
 			UE_LOG(LogTemp, Warning, TEXT("Random value is: %d"), Random);
 			if(Random == 1)
@@ -119,7 +118,7 @@ void AEndlessRunnerGameModeBase::SetFinalScore(float ScoreToAdd)
 	FinalScore = ScoreToAdd;
 }
 
-TArray<int> AEndlessRunnerGameModeBase::SortHighScores(TArray<int> ArrayToSort)
+TArray<int> AEndlessRunnerGameModeBase::SortHighScores(const TArray<int>& ArrayToSort) const
 {
 	TArray<int> temp = ArrayToSort;
 	Algo::Sort(temp);

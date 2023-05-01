@@ -31,7 +31,6 @@ void ABaseMover::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	MoveObstacle(DeltaTime);
-
 }
 
 void ABaseMover::MoveObstacle(float DeltaTime)
@@ -48,6 +47,5 @@ void ABaseMover::MoveObstacle(float DeltaTime)
 		CurrentLocation.Y,
 		CurrentLocation.Z
 	);
-
 	SetActorLocation(NewLocation);
 }

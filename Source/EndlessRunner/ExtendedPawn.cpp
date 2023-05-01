@@ -2,7 +2,6 @@
 
 
 #include "ExtendedPawn.h"
-
 #include "EndlessRunnerGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -24,29 +23,6 @@ void AExtendedPawn::BeginPlay()
 void AExtendedPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-}
-
-// Called to bind functionality to input
-void AExtendedPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	
-	
-	/*if (ActorHasTag("Player1"))
-	{
-		PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AExtendedPawn::CharCrouch);
-		PlayerInputComponent->BindAction("Crouch", IE_Released, this, &AExtendedPawn::ResetRot);
-		PlayerInputComponent->BindAxis("Move Right / Left", this, &AExtendedPawn::Move);
-		PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AExtendedPawn::DoJump);
-	}
-	
-	if (ActorHasTag("Player2"))
-	{
-		PlayerInputComponent->BindAction("CrouchP2", IE_Pressed, this, &AExtendedPawn::CharCrouch);
-		PlayerInputComponent->BindAction("CrouchP2", IE_Released, this, &AExtendedPawn::ResetRot);
-		PlayerInputComponent->BindAxis("Move Right/LeftP2", this, &AExtendedPawn::Move);
-		PlayerInputComponent->BindAction("JumpP2", IE_Pressed, this, &AExtendedPawn::DoJump);
-	}*/
 }
 
 void AExtendedPawn::Move(float Value)

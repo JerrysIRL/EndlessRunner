@@ -29,10 +29,9 @@ private:
 	UPROPERTY()
 	AExtendedPawn* Owner;
 	
-	void CheckForDeath();
+	void CheckForDeath() const;
 	
 
-	
 public:	
 	// Sets default values for this component's properties
 	UCollisionHandler();

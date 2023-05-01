@@ -29,10 +29,10 @@ private:
 	
 	UPROPERTY(EditAnywhere, Category="GameSpeed")
 	float SpeedIncrease = 30;
-	/** Timer delay in seconds for the Speed increase */
+	/* Timer delay in seconds for the Speed increase */
 	UPROPERTY(EditAnywhere, Category="GameSpeed")
 	float SpeedIncreaseRate= 2;
-
+	/* Number of platforms in between each obstacle wave */
 	UPROPERTY(EditAnywhere, Category="Obstacle Spawner")
 	int AmountOfPlatformsToPass = 5;
 	
@@ -72,9 +72,12 @@ private:
 	void AddSpeed();
 
 	UFUNCTION(BlueprintPure)
-	TArray<int> SortHighScores(TArray<int> ArrayToSort);
-
+	TArray<int> SortHighScores(const TArray<int>& ArrayToSort) const;
+	
+	void SpawnInitialPlatforms();
+	
 public:
+	
 	AEndlessRunnerGameModeBase();
 	
 	UFUNCTION(BlueprintNativeEvent)
@@ -100,7 +103,8 @@ public:
 	float GetScore() const;
 
 protected:
-	void SpawnInitialPlatforms();
+	
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	

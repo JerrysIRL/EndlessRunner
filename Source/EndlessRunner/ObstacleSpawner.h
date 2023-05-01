@@ -43,21 +43,24 @@ private:
 	TArray<int> ReturnRandomWave();
 
 	TArray<FVector> PosArray;
-
-	TArray<TArray<int>> PatternsArray;
+	
+	// 4 Different waves.
 	TArray<int> PatternOne = {Obstacle, Obstacle, Obstacle, Coin, Coin, MedPack};
 	TArray<int> PatternTwo = {Obstacle, Obstacle,Obstacle,Obstacle, Coin, Coin};
 	TArray<int> PatternThree ={Obstacle, Obstacle,Obstacle,Obstacle, Obstacle, MedPack};
-	TArray<int> CoinsOnlyWave = {Coin, Coin, Coin, Coin, Coin, Coin};
+	TArray<int> CoinsOnlyPattern = {Coin, Coin, Coin, Coin, Coin, Coin};
+	
+	// Array that hold all the Patterns
+	TArray<TArray<int>> PatternsArray = {PatternOne, PatternTwo, PatternThree};
+	
 
 private:
 	void InitializeSpawnPositions();
 
-	
-
 public:
-	// Sets default values for this actor's properties
+	
 	AObstacleSpawner();
+	
 	UFUNCTION()
 	void SpawnCoinWave();
 	
@@ -67,8 +70,5 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	
 };
