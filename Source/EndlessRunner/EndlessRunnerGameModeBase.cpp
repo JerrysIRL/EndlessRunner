@@ -26,6 +26,7 @@ void AEndlessRunnerGameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	Score += DeltaTime;
+	UE_LOG(LogTemp, Warning, TEXT("Dodged : %s"), DodgedLastWave ? TEXT("True") : TEXT("false") );
 	
 }
 
@@ -76,6 +77,18 @@ void AEndlessRunnerGameModeBase::SpawnObstacleWave()
 {
 	if (MovedPlatformCount == AmountOfPlatformsToPass)
 	{
+		if(DodgedLastWave == true)
+		{
+			// 20% chance to get all coins wave
+			int Random = FMath::RandRange(0, 9);
+			UE_LOG(LogTemp, Warning, TEXT("Random value is: %d"), Random);
+			if(Random == 1)
+			{
+				ObstacleSpawner->SpawnCoinWave();
+				MovedPlatformCount = 0;
+				return;
+			}
+		}
 		ObstacleSpawner->SpawnObstacleWave();
 		MovedPlatformCount = 0;
 	}

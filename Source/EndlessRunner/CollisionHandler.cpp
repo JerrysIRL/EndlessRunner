@@ -26,8 +26,6 @@ void UCollisionHandler::BeginPlay()
 	CurrentHealth = MaxHealthAmount;
 
 	GetOwner()->OnActorBeginOverlap.AddDynamic(this, &UCollisionHandler::ActorBeginOverlap);
-
-	// ...
 }
 
 
@@ -36,25 +34,26 @@ void UCollisionHandler::TickComponent(float DeltaTime, ELevelTick TickType,
                                       FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	
 }
 
 void UCollisionHandler::ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	if (OtherActor->ActorHasTag("Obstacle")) 
-	{
-		CurrentHealth -= 1;
-		Owner->GameModeRef->SetDodgedWaveBool(false);
-		OtherActor->Destroy();
-	}
 	if (OtherActor->ActorHasTag("Coin"))
 	{
 		Owner->GameModeRef->AddToCurrentScore(10);
+		Owner->GameModeRef->SetDodgedWaveBool(true);
 		OtherActor->Destroy();
 	}
 	if (OtherActor->ActorHasTag("MedPack"))
 	{
 		CurrentHealth += 1;
+		Owner->GameModeRef->SetDodgedWaveBool(true);
+		OtherActor->Destroy();
+	}
+	if (OtherActor->ActorHasTag("Obstacle"))
+	{
+		CurrentHealth -= 1;
+		Owner->GameModeRef->SetDodgedWaveBool(false);
 		OtherActor->Destroy();
 	}
 	CheckForDeath();

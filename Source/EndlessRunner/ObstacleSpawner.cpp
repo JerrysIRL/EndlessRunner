@@ -43,7 +43,7 @@ void AObstacleSpawner::BeginPlay()
 	PatternsArray.Add(PatternOne);
 	PatternsArray.Add(PatternTwo);
 	PatternsArray.Add(PatternThree);
-	//UE_LOG(LogTemp, Warning, TEXT("num : %d"), PatternsArray.Num() );
+	
 	InitializeSpawnPositions();
 	SpawnObstacleWave();
 	
@@ -78,7 +78,7 @@ void AObstacleSpawner::SpawnCoinWave()
 {
 	for (int i = 0; i < PosArray.Num(); i++)
 	{
-		GetWorld()->SpawnActor<ABaseMover>(CoinBP, PosArray[i], FRotator(0)); break;
+		GetWorld()->SpawnActor<ABaseMover>(CoinBP, PosArray[i], FRotator(0));
 	}
 }
 

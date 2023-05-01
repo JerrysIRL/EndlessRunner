@@ -77,7 +77,6 @@ private:
 public:
 	AEndlessRunnerGameModeBase();
 	
-	
 	UFUNCTION(BlueprintNativeEvent)
 	void GameOverEvent();
 	
