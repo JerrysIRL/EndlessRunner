@@ -11,11 +11,11 @@ Endless Runner features several game mechanics, including:
 - **Score Counter and Player Health**: A score counter and player health system are be implemented to add more depth to the gameplay.
 
 # Object-Oriented Design
- > Endless Runner was designed using an object-oriented approach, which helped to make the code more modular and reusable. Each game mechanic is implemented as a separate class, with clear interfaces and responsibilities. This approach ensures that each class has only one responsibility and minimizes the risk of code duplication and coupling. Additionally, data is sealed off from other classes to prevent unintended modification.
+  Endless Runner was designed using an object-oriented approach, which helped to make the code more modular and reusable. Each game mechanic is implemented as a separate class, with clear interfaces and responsibilities. This approach ensures that each class has only one responsibility and minimizes the risk of code duplication and coupling. Additionally, data is sealed off from other classes to prevent unintended modification.
  
- > The game loop functionality is sealed off in the custom GameMode class (Game Manager), which manages the spawning of platforms, obstacles, and power-ups, as well as the increasing difficulty. This design decision makes it easy to iterate on the game in the future, as it centralizes the game logic in one place and allows for easy modification and extension.
+  The game loop functionality is sealed off in the custom GameMode class (Game Manager), which manages the spawning of platforms, obstacles, and power-ups, as well as the increasing difficulty. This design decision makes it easy to iterate on the game in the future, as it centralizes the game logic in one place and allows for easy modification and extension.
 
-> Overall, the object-oriented design of Endless Runner helps to keep the code organized, maintainable, and scalable.
+ Overall, the object-oriented design of Endless Runner helps to keep the code organized, maintainable, and scalable.
 
 
 ## Usage
