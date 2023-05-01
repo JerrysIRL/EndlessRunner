@@ -7,7 +7,7 @@ Endless Runner features several game mechanics, including:
 - **Object Pooling**: The game uses object pooling to efficiently spawn and move platforms. A pool of pre-allocated platform objects is created at the start of the game, and these objects are reused as needed instead of creating new ones. This helps to reduce memory allocation and improve performance. The system is controlled by the custom GameMode class, which stores the last platform and a BoxTrigger behind the player. When the player collides with the trigger, the platform moves to the end line.
 - **Basic Movement**: The player can move left and right as well as crouch and jump. The movement is handled by a custom character movement system implemented in a Pawn C++ class.
 - **Increasing difficulty**: As the game progresses, the speed of the game increases, making it more difficult and exciting to play.
-- **Obstacles** : The game includes three different types of obstacles: obstacles, coins, and medpacks. The obstacles are randomized using a shuffle algorithm. Obstacles are implemented as a subclass of the BaseMover class, which handles movement towards the player for both platforms and obstacles. 
+- **Obstacles / Projectiles** : The game includes three different types of obstacles: obstacles, coins, and medpacks. The obstacles are randomized using a shuffle algorithm. Obstacles are implemented as a subclass of the BaseMover class, which handles movement towards the player for both platforms and obstacles. 
 - **Score Counter and Player Health**: A score counter and player health system are be implemented to add more depth to the gameplay.
 
 # Object-Oriented Design
